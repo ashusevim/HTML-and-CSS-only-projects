@@ -1,49 +1,341 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handling Audio and Video files</title>
+    <title>Studio &mdash; Media Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0b12;
+            --surface: rgba(255, 255, 255, .04);
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --accent: #8b5cf6;
+            --accent-2: #ec4899;
+            --border: rgba(255, 255, 255, .1);
+            --radius: 18px;
+            --max: 1120px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(900px 500px at 12% 0%, rgba(139, 92, 246, .18), transparent 55%),
+                radial-gradient(900px 500px at 100% 30%, rgba(236, 72, 153, .14), transparent 55%),
+                var(--bg);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- Header ---------- */
+        .masthead {
+            text-align: center;
+            padding: 80px 24px 40px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--accent-2);
+            margin-bottom: 14px;
+        }
+
+        .masthead h1 {
+            font-size: clamp(34px, 6vw, 58px);
+            font-weight: 900;
+            letter-spacing: -.03em;
+            line-height: 1.05;
+            background: linear-gradient(90deg, #fff, #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .masthead p {
+            color: var(--muted);
+            font-size: 18px;
+            margin-top: 16px;
+        }
+
+        /* ---------- Section ---------- */
+        .section {
+            padding: 40px 0 20px;
+        }
+
+        .section__head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .section__head h2 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -.02em;
+        }
+
+        .section__head span {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* ---------- Video grid ---------- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(139, 92, 246, .5);
+            box-shadow: 0 30px 60px -28px rgba(139, 92, 246, .5);
+        }
+
+        .video-card video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+
+        .video-card__meta {
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .video-card__meta strong {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            background: rgba(139, 92, 246, .14);
+            border: 1px solid rgba(139, 92, 246, .3);
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+
+        /* ---------- Audio list ---------- */
+        .audio-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 14px;
+        }
+
+        .audio-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color .25s ease, background .25s ease;
+        }
+
+        .audio-card:hover {
+            border-color: rgba(236, 72, 153, .45);
+            background: rgba(255, 255, 255, .06);
+        }
+
+        .audio-card__art {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        }
+
+        .audio-card__info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .audio-card__title {
+            font-size: 15px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .audio-card__sub {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .audio-card audio {
+            width: 100%;
+            margin-top: 4px;
+            height: 34px;
+        }
+
+        .audio-card__body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* ---------- Footer ---------- */
+        .foot {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            padding: 60px 24px 40px;
+        }
+
+        @media (max-width: 640px) {
+            .audio-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../showcase.css">
 </head>
 
-<body>
-    <div>
-        <strong>Handling audio files</strong>
-        <ol>
-            <li><audio controls
-                    src="/Projects/Web Development Practice/Exercise 1/Audio files/fight-for-a-while.mp3"></audio></li>
-            <li><audio controls
-                    src="/Projects/Web Development Practice/Exercise 1/Audio files/holiday-for-all.mp3"></audio>
-            </li>
-            <li><audio controls
-                    src="/Projects/Web Development Practice/Exercise 1/Audio files/luck-for-the-brave.mp3"></audio></li>
-            <li><audio controls
-                    src="/Projects/Web Development Practice/Exercise 1/Audio files/promotion-at-work.mp3"></audio></li>
-            <li><audio controls src="/Projects/Web Development Practice/Exercise 1/Audio files/spring-mood.mp3"></audio>
-            </li>
-            <li><audio controls
-                    src="/Projects/Web Development Practice/Exercise 1/Audio files/wildflowers-for-beloved.mp3"></audio>
-            </li>
-        </ol>
-    </div>
+<body class="showcase-fade">
+    <a href="../index.html" class="showcase-home" title="Back to showcase">&larr;</a>
+    <header class="masthead" data-reveal>
+        <span class="eyebrow">Media Studio</span>
+        <h1>Your sights &amp; sounds,<br>beautifully in one place.</h1>
+        <p>A curated gallery of clips and tracks &mdash; stream them right here.</p>
+    </header>
 
-    <hr>
-    <div>
-        <strong>Handling Video files</strong><br>
+    <main class="wrap">
+        <!-- ---------- Video ---------- -->
+        <section class="section">
+            <div class="section__head">
+                <h2>Video</h2>
+                <span>6 clips</span>
+            </div>
+            <div class="video-grid" data-reveal-stagger>
+                <article class="video-card" data-tilt>
+                    <video controls preload="metadata" src="Video files/first.mp4"></video>
+                    <div class="video-card__meta"><strong>Clip One</strong><span class="badge">MP4</span></div>
+                </article>
+                <article class="video-card" data-tilt>
+                    <video controls preload="metadata" src="Video files/second.mp4"></video>
+                    <div class="video-card__meta"><strong>Clip Two</strong><span class="badge">MP4</span></div>
+                </article>
+                <article class="video-card" data-tilt>
+                    <video controls preload="metadata" src="Video files/third.mp4"></video>
+                    <div class="video-card__meta"><strong>Clip Three</strong><span class="badge">MP4</span></div>
+                </article>
+                <article class="video-card" data-tilt>
+                    <video controls preload="metadata" src="Video files/fourth.mp4"></video>
+                    <div class="video-card__meta"><strong>Clip Four</strong><span class="badge">MP4</span></div>
+                </article>
+                <article class="video-card" data-tilt>
+                    <video controls preload="metadata" src="Video files/fifth.mp4"></video>
+                    <div class="video-card__meta"><strong>Clip Five</strong><span class="badge">MP4</span></div>
+                </article>
+                <article class="video-card" data-tilt>
+                    <video controls preload="metadata" src="Video files/sixth.mp4"></video>
+                    <div class="video-card__meta"><strong>Clip Six</strong><span class="badge">MP4</span></div>
+                </article>
+            </div>
+        </section>
 
-        <video height="200px" width="200px" controls
-            src="/Projects/Web Development Practice/Exercise 1/Video files/first.mp4"></video>
-        <video height="200px" width="200px" controls
-            src="/Projects/Web Development Practice/Exercise 1/Video files/second.mp4"></video>
-        <video height="200px" width="200px" controls
-            src="/Projects/Web Development Practice/Exercise 1/Video files/third.mp4"></video>
-        <video height="200px" width="200px" controls
-            src="/Projects/Web Development Practice/Exercise 1/Video files/fourth.mp4"></video>
-        <video height="200px" width="200px" controls
-            src="/Projects/Web Development Practice/Exercise 1/Video files/fifth.mp4"></video>
-        <video height="200px" width="200px" controls
-            src="/Projects/Web Development Practice/Exercise 1/Video files/sixth.mp4"></video>
-    </div>
+        <!-- ---------- Audio ---------- -->
+        <section class="section">
+            <div class="section__head">
+                <h2>Audio</h2>
+                <span>6 tracks</span>
+            </div>
+            <div class="audio-list" data-reveal-stagger>
+                <article class="audio-card">
+                    <div class="audio-card__art">&#9834;</div>
+                    <div class="audio-card__body">
+                        <div class="audio-card__title">Fight For A While</div>
+                        <audio controls preload="none" src="Audio files/fight-for-a-while.mp3"></audio>
+                    </div>
+                </article>
+                <article class="audio-card">
+                    <div class="audio-card__art">&#9834;</div>
+                    <div class="audio-card__body">
+                        <div class="audio-card__title">Holiday For All</div>
+                        <audio controls preload="none" src="Audio files/holiday-for-all.mp3"></audio>
+                    </div>
+                </article>
+                <article class="audio-card">
+                    <div class="audio-card__art">&#9834;</div>
+                    <div class="audio-card__body">
+                        <div class="audio-card__title">Luck For The Brave</div>
+                        <audio controls preload="none" src="Audio files/luck-for-the-brave.mp3"></audio>
+                    </div>
+                </article>
+                <article class="audio-card">
+                    <div class="audio-card__art">&#9834;</div>
+                    <div class="audio-card__body">
+                        <div class="audio-card__title">Promotion At Work</div>
+                        <audio controls preload="none" src="Audio files/promotion-at-work.mp3"></audio>
+                    </div>
+                </article>
+                <article class="audio-card">
+                    <div class="audio-card__art">&#9834;</div>
+                    <div class="audio-card__body">
+                        <div class="audio-card__title">Spring Mood</div>
+                        <audio controls preload="none" src="Audio files/spring-mood.mp3"></audio>
+                    </div>
+                </article>
+                <article class="audio-card">
+                    <div class="audio-card__art">&#9834;</div>
+                    <div class="audio-card__body">
+                        <div class="audio-card__title">Wildflowers For Beloved</div>
+                        <audio controls preload="none" src="Audio files/wildflowers-for-beloved.mp3"></audio>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="foot">© 2026 Media Studio &middot; All tracks &amp; clips for demo use.</footer>
+    <script src="../showcase.js"></script>
 </body>
 
 </html>

@@ -5,130 +5,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix UI Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../showcase.css">
 </head>
 
-<body>
-    <div class="main">
-        <div class="homepage">
-            <div class="nav">
-                <img class="netflix-logo" src="Assets/logo.svg">
-
-                <div class="language-selection">
-                    <img src="Assets/lang.svg" alt="lang-icon">
+<body class="showcase-fade">
+    <a href="../index.html" class="showcase-home" title="Back to showcase">&larr;</a>
+    <!-- ---------- Hero ---------- -->
+    <header class="hero">
+        <div class="hero__overlay"></div>
+        <nav class="nav">
+            <img class="nav__logo" src="Assets/logo.svg" alt="Netflix">
+            <div class="nav__right">
+                <div class="lang">
+                    <img src="Assets/lang.svg" alt="">
                     <span>English</span>
                 </div>
-                <button class="sign-in-btn">Sign In</button>
+                <button class="btn btn--red btn--sm">Sign In</button>
             </div>
-            <div class="bg-image">
-                <img src="Assets/IN-en-20240722-POP_SIGNUP_TWO_WEEKS-perspective_WEB_3457a8b1-284d-4bb5-979e-2a2e9bb342b3_small.jpg"
-                    alt="bg-image">
-            </div>
+        </nav>
 
-            <div class="content">
-                <h1>Unlimited movies, TV shows and more</h1>
-                <h3>Watch anywhere. Cancel anytime.</h3>
-                <h4>Ready to watch? Enter your email to create or restart your membership.</h4>
-
-                <div class="email-box">
-                    <span>Email address</span>
-                    <button>Get Started</button>
-                </div>
-            </div>
+        <div class="hero__content">
+            <h1>Unlimited movies, TV shows and more</h1>
+            <h2>Watch anywhere. Cancel anytime.</h2>
+            <p>Ready to watch? Enter your email to create or restart your membership.</p>
+            <form class="email-box" onsubmit="return false">
+                <input type="email" placeholder="Email address" aria-label="Email address">
+                <button class="btn btn--red">Get Started &rsaquo;</button>
+            </form>
         </div>
+    </header>
 
-        <div class="second-part">
-            <div class="left-part">
-                <h1>Enjoy on your TV</h1>
-
+    <main>
+        <!-- ---------- TV ---------- -->
+        <section class="feature" data-reveal>
+            <div class="feature__text">
+                <h2>Enjoy on your TV</h2>
                 <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
             </div>
-
-            <div class="run-video">
-                <img src="Assets/second-part.png" alt="video-frame">
-                <video id="video" autoplay loop>
+            <div class="feature__media media-tv">
+                <img src="Assets/second-part.png" alt="TV frame">
+                <video autoplay loop muted playsinline>
                     <source src="Assets/second-part.m4v">
                 </video>
             </div>
-        </div>
+        </section>
 
-        <div class="third-part">
-            <img src="Assets/third-part.jpg" alt="" srcset="">
-            <div class="text">
-                <span style="font-size: 50px;">Download your shows to watch offline</span>
-                <br>
-                <span style="font-size: 25px;">Save your favourites easily and always have something to watch.</span>
+        <!-- ---------- Download ---------- -->
+        <section class="feature feature--reverse" data-reveal>
+            <div class="feature__text">
+                <h2>Download your shows to watch offline</h2>
+                <p>Save your favourites easily and always have something to watch.</p>
             </div>
-        </div>
+            <div class="feature__media">
+                <img class="feature__img" src="Assets/third-part.jpg" alt="Download shows">
+            </div>
+        </section>
 
-        <div class="fourth-part">
-            <div class="text-2">
-                <span style="font-size: 45px;">Watch everywhere</span>
-                <br>
-                <span style="font-size: 25px;">Stream unlimited movies and TV shows on your phone, tablet, laptop, and
-                    TV.</span>
+        <!-- ---------- Everywhere ---------- -->
+        <section class="feature" data-reveal>
+            <div class="feature__text">
+                <h2>Watch everywhere</h2>
+                <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+            </div>
+            <div class="feature__media media-device">
+                <img src="Assets/frame-fourth-part.png" alt="Device frame">
+                <video autoplay loop muted playsinline src="Assets/fourth-part-vide.m4v"></video>
+            </div>
+        </section>
+
+        <!-- ---------- Kids ---------- -->
+        <section class="feature feature--reverse" data-reveal>
+            <div class="feature__text">
+                <h2>Create profiles for kids</h2>
+                <p>Send children on adventures with their favourite characters in a space made just for them&mdash;free
+                    with your membership.</p>
+            </div>
+            <div class="feature__media">
+                <img class="feature__img" src="Assets/fifth-part.png" alt="Kids profiles">
+            </div>
+        </section>
+
+        <!-- ---------- FAQ ---------- -->
+        <section class="faqs" data-reveal>
+            <h2>Frequently Asked Questions</h2>
+            <div class="accordion">
+                <details>
+                    <summary>What is Netflix?<span class="plus">+</span></summary>
+                    <div class="accordion__body">Netflix is a streaming service that offers a wide variety of
+                        award-winning TV shows, films, anime, documentaries and more &mdash; on thousands of
+                        internet-connected devices.</div>
+                </details>
+                <details>
+                    <summary>How much does Netflix cost?<span class="plus">+</span></summary>
+                    <div class="accordion__body">Watch Netflix on your smartphone, tablet, smart TV, laptop or streaming
+                        device, all for one fixed monthly fee. Plans range in price with no extra costs and no
+                        contracts.</div>
+                </details>
+                <details>
+                    <summary>Where can I watch?<span class="plus">+</span></summary>
+                    <div class="accordion__body">Watch anywhere, anytime. Sign in with your account to watch instantly
+                        on the web at netflix.com or on any internet-connected device.</div>
+                </details>
+                <details>
+                    <summary>How do I cancel?<span class="plus">+</span></summary>
+                    <div class="accordion__body">Netflix is flexible. There are no annoying contracts and no
+                        commitments. You can easily cancel your account online in two clicks.</div>
+                </details>
+                <details>
+                    <summary>What can I watch on Netflix?<span class="plus">+</span></summary>
+                    <div class="accordion__body">Netflix has an extensive library of feature films, documentaries, TV
+                        shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime.</div>
+                </details>
+                <details>
+                    <summary>Is Netflix good for kids?<span class="plus">+</span></summary>
+                    <div class="accordion__body">The Netflix Kids experience is included in your membership to give
+                        parents control while kids enjoy family-friendly TV shows and films in their own space.</div>
+                </details>
             </div>
 
-            <div class="run-video-2">
-                <img src="Assets/frame-fourth-part.png" alt="video-frame">
-                <video id="video-2" autoplay loop src="Assets/fourth-part-vide.m4v"></video>
-            </div>
-        </div>
+            <p class="faqs__cta-text">Ready to watch? Enter your email to create or restart your membership.</p>
+            <form class="email-box" onsubmit="return false">
+                <input type="email" placeholder="Email address" aria-label="Email address">
+                <button class="btn btn--red">Get Started &rsaquo;</button>
+            </form>
+        </section>
+    </main>
 
-        <div class="fifth-part">
-            <img src="Assets/fifth-part.png" alt="" srcset="">
-            <div>
-                <span style="font-size: 45px;">Create profiles for kids</span>
-
-                <span style="font-size: 23px;">
-                    Send children on adventures with their favourite characters in a space made just for them—free with
-                    your
-                    membership.</span>
-            </div>
-        </div>
-
-        <div class="faqs">
-            <h1>Frequently Asked Questions</h1>
-            <div class="questions">
-                <div>
-                    What is netflix?
-                    <img class="plus-icon" style="margin: 59vw;" src="Assets/plus-icon.svg">
-                </div>
-                <div>
-                    How much does Netflix cost?
-                    <img class="plus-icon" style="margin: 49.5vw;" src="Assets/plus-icon.svg">
-                </div>
-                <div>
-                    Where can I watch?
-                    <img class="plus-icon" style="margin: 57.3vw;" src="Assets/plus-icon.svg">
-                </div>
-                <div>
-                    How do I cancel?
-                    <img class="plus-icon" style="margin: 59vw;" src="Assets/plus-icon.svg">
-                </div>
-                <div>
-                    What can I watch on Netflix?
-                    <img class="plus-icon" style="margin: 48.7vw;" src="Assets/plus-icon.svg">
-                </div>
-                <div>
-                    Is Netflix good for kids?
-                    <img class="plus-icon" style="margin: 51.2vw;" src="Assets/plus-icon.svg">
-                </div>
-            </div>
-
-            <span class="ready-to-watch-text" style="font-size: 1.25rem; font-weight: 400; font-height: 1.5">Ready to
-                watch? Enter
-                your email to
-                create or restart your membership.</span>
-
-            <div class="email-box">
-                <span>Email address</span>
-                <button>Get Started</button>
-            </div>
-        </div>
-
-        <footer>
-            <span>Questions? Call <u>000-800-919-1694</u></span>
+    <!-- ---------- Footer ---------- -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <p class="footer__call">Questions? Call <a href="#">000-800-919-1694</a></p>
             <ul>
                 <li>FAQ</li>
                 <li>Help Centre</li>
@@ -146,15 +156,14 @@
                 <li>Legal Notices</li>
                 <li>Only on Netflix</li>
             </ul>
-
-            <div id="lang-sel">
-                <img src="Assets/lang.svg" alt="lang-icon">
-                <span style="color: white;">English</span>
+            <div class="lang lang--footer">
+                <img src="Assets/lang.svg" alt="">
+                <span>English</span>
             </div>
-
-            <span id="n-i">Netflix India</span>
-        </footer>
-    </div>
+            <p class="footer__region">Netflix India</p>
+        </div>
+    </footer>
+    <script src="../showcase.js"></script>
 </body>
 
 </html>

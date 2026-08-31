@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase &mdash; HTML &amp; CSS Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="showcase.css">
+    <style>
+        :root {
+            --bg: #070810;
+            --surface: rgba(255, 255, 255, .04);
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, .1);
+            --radius: 20px;
+            --max: 1160px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(900px 500px at 12% 0%, rgba(37, 99, 235, .18), transparent 55%),
+                radial-gradient(900px 500px at 100% 15%, rgba(124, 58, 237, .16), transparent 55%),
+                radial-gradient(800px 500px at 80% 100%, rgba(236, 72, 153, .12), transparent 55%),
+                var(--bg);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- Header ---------- */
+        .masthead {
+            text-align: center;
+            padding: 90px 24px 20px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #a5b4fc;
+            margin-bottom: 16px;
+        }
+
+        .masthead h1 {
+            font-size: clamp(38px, 7vw, 68px);
+            font-weight: 900;
+            letter-spacing: -.035em;
+            line-height: 1.02;
+            background: linear-gradient(90deg, #fff, #c4b5fd 60%, #f0abfc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .masthead p {
+            color: var(--muted);
+            font-size: 18px;
+            margin: 18px auto 0;
+            max-width: 560px;
+        }
+
+        .masthead .count {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 26px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #a5b4fc;
+            background: rgba(124, 58, 237, .12);
+            border: 1px solid rgba(124, 58, 237, .3);
+            padding: 7px 16px;
+            border-radius: 999px;
+        }
+
+        /* ---------- Grid ---------- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 22px;
+            padding: 50px 0 40px;
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px;
+            overflow: hidden;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s ease, border-color .3s ease;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--accent, linear-gradient(135deg, #2563eb, #7c3aed));
+            opacity: 0;
+            transition: opacity .3s ease;
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, .28);
+            box-shadow: 0 40px 80px -32px rgba(0, 0, 0, .8);
+        }
+
+        .card__icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 15px;
+            display: grid;
+            place-items: center;
+            font-size: 26px;
+            background: var(--accent, linear-gradient(135deg, #2563eb, #7c3aed));
+            box-shadow: 0 12px 28px -10px rgba(0, 0, 0, .6);
+            margin-bottom: 20px;
+        }
+
+        .card__title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -.02em;
+        }
+
+        .card__desc {
+            color: var(--muted);
+            font-size: 14.5px;
+            margin-top: 8px;
+            flex: 1;
+        }
+
+        .card__foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .card__tag {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .card__cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .card__cta svg {
+            transition: transform .25s ease;
+        }
+
+        .card:hover .card__cta svg {
+            transform: translateX(4px);
+        }
+
+        /* ---------- Footer ---------- */
+        .foot {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            padding: 40px 24px 60px;
+        }
+
+        @media (max-width: 520px) {
+            .masthead {
+                padding-top: 64px;
+            }
+        }
+    </style>
+</head>
+
+<body class="showcase-fade">
+    <header class="masthead" data-reveal>
+        <span class="eyebrow">Portfolio</span>
+        <h1>HTML &amp; CSS Showcase</h1>
+        <p>A collection of front-end experiments &mdash; open any project in one click.</p>
+        <span class="count">&#9679; 8 projects</span>
+    </header>
+
+    <main class="wrap">
+        <section class="grid" data-reveal-stagger>
+
+            <a class="card" data-tilt href="Card/index.html" style="--accent: linear-gradient(135deg,#3b82f6,#06b6d4);">
+                <div class="card__icon">&#127796;</div>
+                <h2 class="card__title">Travel Card</h2>
+                <p class="card__desc">A premium destination card with glassmorphism tags, hover zoom, rating and price.</p>
+                <div class="card__foot">
+                    <span class="card__tag">UI Card</span>
+                    <span class="card__cta">Open
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" data-tilt href="Bounce%20Animation/index.html" style="--accent: linear-gradient(135deg,#6366f1,#22d3ee);">
+                <div class="card__icon">&#9917;</div>
+                <h2 class="card__title">Bounce Animation</h2>
+                <p class="card__desc">A kinetic CSS showcase with squash-and-stretch physics and a live shadow.</p>
+                <div class="card__foot">
+                    <span class="card__tag">Motion</span>
+                    <span class="card__cta">Open
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" data-tilt href="Basic%20website%20layout/index.html" style="--accent: linear-gradient(135deg,#2563eb,#7c3aed);">
+                <div class="card__icon">&#127760;</div>
+                <h2 class="card__title">SaaS Landing Page</h2>
+                <p class="card__desc">A full marketing page: glass nav, hero with stats, feature grid and CTA band.</p>
+                <div class="card__foot">
+                    <span class="card__tag">Landing</span>
+                    <span class="card__cta">Open
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" data-tilt href="ultraEditUI%20Clone/index.html" style="--accent: linear-gradient(135deg,#22c1d6,#14b8a6);">
+                <div class="card__icon">&#128190;</div>
+                <h2 class="card__title">UltraEdit Download</h2>
+                <p class="card__desc">A dark download page with a hero, ratings and a localized download grid.</p>
+                <div class="card__foot">
+                    <span class="card__tag">Clone</span>
+                    <span class="card__cta">Open
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" data-tilt href="Github%20Profile%20card/main.html" style="--accent: linear-gradient(135deg,#58a6ff,#a371f7);">
+                <div class="card__icon">&#128100;</div>
+                <h2 class="card__title">GitHub Profile Finder</h2>
+                <p class="card__desc">Search any GitHub username and preview their profile card live.</p>
+                <div class="card__foot">
+                    <span class="card__tag">API &middot; JS</span>
+                    <span class="card__cta">Open
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" data-tilt href="unlimitedColors/index.html" style="--accent: linear-gradient(135deg,#f472b6,#8b5cf6);">
+                <div class="card__icon">&#127912;</div>
+                <h2 class="card__title">Chroma Colors</h2>
+                <p class="card__desc">Shift through an endless palette with a live hex readout and smooth fades.</p>
+                <div class="card__foot">
+                    <span class="card__tag">JS &middot; Fun</span>
+                    <span class="card__cta">Open
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" data-tilt href="netflixUI%20Clone/index.html" style="--accent: linear-gradient(135deg,#e50914,#7f1d1d);">
+                <div class="card__icon">&#127909;</div>
+                <h2 class="card__title">Netflix UI Clone</h2>
+                <p class="card__desc">A responsive Netflix landing page with feature sections and an accordion FAQ.</p>
+                <div class="card__foot">
+                    <span class="card__tag">Clone</span>
+                    <span class="card__cta">Open
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" data-tilt href="Handling%20Audio%20Video/index.html" style="--accent: linear-gradient(135deg,#8b5cf6,#ec4899);">
+                <div class="card__icon">&#127925;</div>
+                <h2 class="card__title">Media Studio</h2>
+                <p class="card__desc">A gallery of video clips and audio tracks you can stream right in the browser.</p>
+                <div class="card__foot">
+                    <span class="card__tag">Media</span>
+                    <span class="card__cta">Open
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            </a>
+
+        </section>
+    </main>
+
+    <footer class="foot">© 2026 &middot; HTML &amp; CSS Showcase &mdash; click any card to explore.</footer>
+    <script src="showcase.js"></script>
+</body>
+
+</html>

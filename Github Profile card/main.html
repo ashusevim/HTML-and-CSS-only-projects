@@ -4,63 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create a card</title>
+    <title>GitHub Profile Finder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../showcase.css" />
 </head>
 
-<body>
-    <div class="input-container" style="white-space: nowrap;">
-        <label for="username">username:</label>
-        <input type="text" id="username">
-    </div>
-    <button onclick="handleUserData()">Create</button>
+<body class="showcase-fade">
+    <a href="../index.html" class="showcase-home" title="Back to showcase">&larr;</a>
+    <main class="finder" data-reveal>
+        <header class="finder__head">
+            <h1>GitHub Profile Finder</h1>
+            <p>Search any GitHub username to preview their profile.</p>
+        </header>
 
-    <span id="displayThis"></span>
+        <form class="search" id="searchForm" autocomplete="off">
+            <span class="search__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </span>
+            <input type="text" id="username" placeholder="Enter a GitHub username&hellip;" aria-label="GitHub username" />
+            <button type="submit" class="search__btn">Search</button>
+        </form>
 
-    <div class="profile-card">
-        <img src="" alt="Pic" class="profile-pic">
-        <div class="info">
-            <p class="username">username</p>
-            <p class="followers">123 Followers</p>
-        </div>
-    </div>
-</body>
+        <section class="card" id="card" hidden>
+            <img class="card__avatar" id="avatar" src="" alt="Profile avatar" />
+            <div class="card__body">
+                <h2 class="card__name" id="name"></h2>
+                <a class="card__login" id="login" href="#" target="_blank" rel="noopener"></a>
+                <p class="card__bio" id="bio"></p>
+                <div class="card__stats">
+                    <div><strong id="repos">0</strong><span>Repos</span></div>
+                    <div><strong id="followers">0</strong><span>Followers</span></div>
+                    <div><strong id="following">0</strong><span>Following</span></div>
+                </div>
+                <a class="card__link" id="profileLink" href="#" target="_blank" rel="noopener">View profile &rarr;</a>
+            </div>
+        </section>
 
-<script>
-    // console.log(userData)
-    function handleUserData() {
-        var userData = document.getElementById('username').value;
+        <p class="status" id="status" role="status"></p>
+    </main>
 
-        if (userData !== undefined) {
-            const requestUrl = `https://api.github.com/users/${userData}`;
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', requestUrl)
-            xhr.setRequestHeader('Authorization', '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');
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    const data = JSON.parse(this.responseText);
-                    // console.log(data.avatar_url);
-                    // console.log(data.login);
-                    // console.log(data.followers);
+    <script>
+        const form = document.getElementById('searchForm');
+        const input = document.getElementById('username');
+        const card = document.getElementById('card');
+        const status = document.getElementById('status');
 
-                    const username = document.querySelector('.username');
-                    username.innerHTML = data.login;
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = input.value.trim();
 
-                    const followersSection = document.querySelector('.followers');
-                    const followersCnt = `${data.followers} followers`;
-                    followersSection.innerHTML = followersCnt;
-
-                    const profilePic = document.querySelector('.profile-pic');
-                    profilePic.src = data.avatar_url
-                }
+            if (!user) {
+                showStatus('Please enter a username.');
+                return;
             }
-            xhr.send();
-        }
-        else {
-            alert('Please give correct username')
-        }
-    }
 
-</script>
+            card.hidden = true;
+            showStatus('Searching…');
+
+            try {
+                // Public, unauthenticated GitHub API — no token required.
+                const res = await fetch(`https://api.github.com/users/${encodeURIComponent(user)}`);
+
+                if (res.status === 404) {
+                    showStatus(`No user found for “${user}”.`);
+                    return;
+                }
+                if (!res.ok) {
+                    showStatus('Something went wrong. Please try again later.');
+                    return;
+                }
+
+                const data = await res.json();
+                render(data);
+                showStatus('');
+            } catch (err) {
+                showStatus('Network error. Check your connection and try again.');
+            }
+        });
+
+        function render(data) {
+            document.getElementById('avatar').src = data.avatar_url;
+            document.getElementById('name').textContent = data.name || data.login;
+
+            const login = document.getElementById('login');
+            login.textContent = '@' + data.login;
+            login.href = data.html_url;
+
+            document.getElementById('bio').textContent = data.bio || 'No bio available.';
+            document.getElementById('repos').textContent = data.public_repos;
+            document.getElementById('followers').textContent = data.followers;
+            document.getElementById('following').textContent = data.following;
+            document.getElementById('profileLink').href = data.html_url;
+
+            card.hidden = false;
+        }
+
+        function showStatus(msg) {
+            status.textContent = msg;
+        }
+    </script>
+    <script src="../showcase.js"></script>
+</body>
 
 </html>

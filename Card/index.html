@@ -1,25 +1,74 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card</title>
+    <title>Serene &mdash; Discover Places</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../showcase.css">
 </head>
 
-<body>
-    <div>
-        <img src="card_image.jpg">
-        <span class="Nature">Nature</span>
-        <span class="Lake">Lake</span>
-        <h2 style="font-family:monospace">Visit this place</h2>
-        <p style="font-family: monospace;">Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Deserunt architecto impedit
-            explicabo libero culpa dolorum consectetur
-            distinctio facilis vero quasi!
-        </p>
-        <span class="read-more" style="color: blue; font: bold;">Read More</span>
-    </div>
+<body class="showcase-fade">
+    <a href="../index.html" class="showcase-home" title="Back to showcase">&larr;</a>
+    <main class="card" data-tilt>
+        <div class="card__media">
+            <img src="card_image.jpg" alt="A tranquil lake surrounded by nature">
+            <div class="card__tags">
+                <span class="tag">Nature</span>
+                <span class="tag">Lake</span>
+            </div>
+        </div>
+
+        <div class="card__body">
+            <div class="card__meta">
+                <span class="card__location">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Lake Bled, Slovenia
+                </span>
+                <span class="card__rating">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                        <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.401 8.168L12 18.896l-7.335 3.858 1.401-8.168L.132 9.21l8.2-1.192z" />
+                    </svg>
+                    4.9
+                </span>
+            </div>
+
+            <h2 class="card__title">Visit this place</h2>
+            <p class="card__text">
+                A hidden alpine escape where glassy waters mirror the mountains.
+                Wander quiet trails, breathe in the crisp air, and let the calm settle in.
+            </p>
+            <p class="card__more" id="cardMore" hidden>
+                Rowboats drift past the island church at dawn, and a clifftop castle
+                watches over the valley. Nearby trails lead to waterfalls and
+                mountain viewpoints &mdash; perfect for a slow, restorative weekend.
+            </p>
+
+            <div class="card__footer">
+                <div class="card__price">
+                    <span class="card__price-value">$249</span>
+                    <span class="card__price-unit">/ night</span>
+                </div>
+                <button class="card__cta" id="readMore" type="button" aria-expanded="false" aria-controls="cardMore">
+                    <span class="card__cta-label">Read More</span>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </main>
+    <script src="../showcase.js"></script>
 </body>
 
 </html>

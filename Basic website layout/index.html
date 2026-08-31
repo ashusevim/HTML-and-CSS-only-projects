@@ -4,53 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layout Design</title>
+    <title>Northwind &mdash; Build faster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../showcase.css">
 </head>
 
-<body>
-    <nav>
-        <ul>
-            <li>Home</li>
-            <li>Resource</li>
-            <li>Projects</li>
-            <li>About me</li>
-        </ul>
-    </nav>
-
-    <div class="mainContent">
-        <div class="boxes">
-            <div class="box1"></div>
-            <div class="box2"></div>
+<body class="showcase-fade">
+    <a href="../index.html" class="showcase-home" title="Back to showcase">&larr;</a>
+    <header class="nav">
+        <div class="nav__inner">
+            <a class="brand" href="#">
+                <span class="brand__mark"></span>
+                Northwind
+            </a>
+            <nav class="nav__links">
+                <a href="#">Home</a>
+                <a href="#">Resources</a>
+                <a href="#">Projects</a>
+                <a href="#">About</a>
+            </nav>
+            <a class="btn btn--sm" href="#">Get started</a>
         </div>
+    </header>
 
-        <div class="rec">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos pariatur illum mollitia consectetur
-            laborum cupiditate rem porro alias vitae modi dolorum animi, error iure veritatis officia doloribus tempore
-            totam quas natus dolorem. Adipisci cum dicta laborum quia perspiciatis deserunt nam distinctio soluta
-            repudiandae eaque repellendus culpa, temporibus iusto dolore et quae mollitia similique fugiat, aspernatur
-            vel
-            nulla, fuga aliquid minus! Laboriosam, molestias libero. Voluptas, culpa enim? Earum et ipsam sit possimus.
-            Quidem debitis nobis voluptas expedita accusamus nihil nostrum libero ipsum necessitatibus, reprehenderit et
-            iste! Magnam doloremque adipisci doloribus natus, omnis ipsa repudiandae quidem facere voluptate tenetur
-            eum,
-            sit odit.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi sunt expedita adipisci, aut enim minima
-            ipsum
-            facilis inventore earum fuga illo asperiores voluptas architecto nulla vel. Nihil sapiente quo fugiat.
+    <main>
+        <section class="hero">
+            <span class="pill">New &middot; v2.0 is here</span>
+            <h1>The platform for teams<br>who ship <span class="grad">faster</span>.</h1>
+            <p class="hero__sub">
+                Design, build, and launch beautiful products without the busywork.
+                One workspace for your entire team.
+            </p>
+            <div class="hero__actions">
+                <a class="btn" href="#">Start building &rarr;</a>
+                <a class="btn btn--ghost" href="#">Watch demo</a>
+            </div>
+            <div class="hero__stats">
+                <div><strong>12k+</strong><span>Teams</span></div>
+                <div><strong>99.9%</strong><span>Uptime</span></div>
+                <div><strong>4.9/5</strong><span>Rating</span></div>
+            </div>
+        </section>
+
+        <section class="features" data-reveal-stagger>
+            <article class="feature" data-tilt>
+                <div class="feature__icon">&#9889;</div>
+                <h3>Lightning fast</h3>
+                <p>Ship in minutes with a workflow engineered for speed and clarity.</p>
+            </article>
+            <article class="feature" data-tilt>
+                <div class="feature__icon">&#128274;</div>
+                <h3>Secure by default</h3>
+                <p>Enterprise-grade security and compliance baked into every layer.</p>
+            </article>
+            <article class="feature" data-tilt>
+                <div class="feature__icon">&#127760;</div>
+                <h3>Global scale</h3>
+                <p>Deploy to the edge and reach users anywhere with low latency.</p>
+            </article>
+        </section>
+
+        <section class="cta-band" data-reveal>
+            <h2>Ready to build something great?</h2>
+            <p>Join thousands of teams already shipping with Northwind.</p>
+            <a class="btn" href="#">Create your workspace</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <a class="brand" href="#"><span class="brand__mark"></span>Northwind</a>
+            <div class="footer__cols">
+                <div>
+                    <h4>Product</h4>
+                    <a href="#">Features</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">Changelog</a>
+                </div>
+                <div>
+                    <h4>Resources</h4>
+                    <a href="#">Docs</a>
+                    <a href="#">Guides</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
         </div>
-
-        <img width="80" height="80" src="https://img.icons8.com/ios-filled/50/doraemon.png" alt="doraemon" />
-
-    </div>
-
-    <footer>
-        <ul>
-            <li>Resources</li>
-            <li>Coding Profiles</li>
-            <li>Projects</li>
-        </ul>
+        <div class="footer__bar">© 2026 Northwind Inc. All rights reserved.</div>
     </footer>
+    <script src="../showcase.js"></script>
 </body>
 
 </html>

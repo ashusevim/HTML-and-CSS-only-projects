@@ -4,61 +4,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bounce Animation</title>
+    <title>Motion &mdash; Kinetic Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
-        .container {
-            width: 60vw;
-            height: 40vh;
-            background-color: blue;
+        :root {
+            --bg: #060815;
+            --accent: #6366f1;
+            --accent-2: #22d3ee;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(900px 500px at 15% 10%, rgba(99, 102, 241, .18), transparent 60%),
+                radial-gradient(900px 500px at 85% 90%, rgba(34, 211, 238, .16), transparent 60%),
+                var(--bg);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            padding: 40px 20px;
+        }
+
+        .showcase {
+            width: min(900px, 100%);
+        }
+
+        .showcase__header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--accent-2);
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .showcase__header h1 {
+            font-size: clamp(28px, 5vw, 46px);
+            font-weight: 800;
+            letter-spacing: -.03em;
+            background: linear-gradient(90deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .showcase__header p {
+            color: var(--muted);
+            margin-top: 12px;
+            font-size: 15px;
+        }
+
+        .stage {
             position: relative;
+            height: 44vh;
+            min-height: 300px;
+            border-radius: 28px;
+            overflow: hidden;
+            background: linear-gradient(160deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01));
+            border: 1px solid rgba(255, 255, 255, .08);
+            box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .8);
         }
 
-        .box {
-            width: 70px;
-            height: 70px;
-            background-color: red;
-            border-radius: 100%;
+        /* subtle grid floor */
+        .stage::before {
+            content: "";
             position: absolute;
-            bottom: 0;
-            left: 0;
-            animation-name: Bounce;
-            animation-duration: 7s;
-            animation-timing-function: ease-in-out;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to top, #000, transparent 70%);
+            -webkit-mask-image: linear-gradient(to top, #000, transparent 70%);
         }
 
-        @keyframes Bounce {
-            0% {
-                left: 0;
-                bottom: 0;
-            }
+        .ball {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 32% 30%, #fff 0, #a5b4fc 22%, var(--accent) 60%, #4338ca 100%);
+            box-shadow:
+                0 0 0 6px rgba(99, 102, 241, .12),
+                0 18px 40px -8px rgba(99, 102, 241, .8);
+            animation: bounce 5s cubic-bezier(.5, 0, .5, 1) infinite;
+        }
 
-            25% {
-                left: calc(25% - 70px);
-                bottom: 50%;
-            }
+        .shadow {
+            position: absolute;
+            bottom: 18px;
+            left: 24px;
+            width: 64px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, .55);
+            filter: blur(6px);
+            animation: shadow 5s cubic-bezier(.5, 0, .5, 1) infinite;
+        }
 
-            50% {
-                left: calc(50% - 70px);
-                bottom: 0;
-            }
+        @keyframes bounce {
+            0%   { left: 24px;                    transform: translateY(0)    scale(1); }
+            25%  { left: calc(25% - 32px);        transform: translateY(-55%) scale(1.04, .96); }
+            50%  { left: calc(50% - 32px);        transform: translateY(0)    scale(1.1, .82); }
+            75%  { left: calc(75% - 32px);        transform: translateY(-55%) scale(1.04, .96); }
+            100% { left: calc(100% - 88px);       transform: translateY(0)    scale(1); }
+        }
 
-            75% {
-                left: calc(75% - 70px);
-                bottom: 50%;
-            }
+        @keyframes shadow {
+            0%   { left: 24px;              transform: scale(1);   opacity: .55; }
+            25%  { left: calc(25% - 32px);  transform: scale(.6);  opacity: .25; }
+            50%  { left: calc(50% - 32px);  transform: scale(1.1); opacity: .6; }
+            75%  { left: calc(75% - 32px);  transform: scale(.6);  opacity: .25; }
+            100% { left: calc(100% - 88px); transform: scale(1);   opacity: .55; }
+        }
 
-            100% {
-                left: calc(100% - 70px);
-                bottom: 0;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            .ball, .shadow { animation: none; }
         }
     </style>
+    <link rel="stylesheet" href="../showcase.css">
 </head>
 
-<body>
-    <div class="container">
-        <div class="box"></div>
-    </div>
+<body class="showcase-fade">
+    <a href="../index.html" class="showcase-home" title="Back to showcase">&larr;</a>
+    <section class="showcase">
+        <div class="showcase__header" data-reveal>
+            <span class="eyebrow">Motion Design</span>
+            <h1>Physics in Every Frame</h1>
+            <p>A study in easing, squash &amp; stretch, and depth &mdash; built with pure CSS.</p>
+        </div>
+        <div class="stage" data-reveal>
+            <div class="shadow"></div>
+            <div class="ball"></div>
+        </div>
+    </section>
+    <script src="../showcase.js"></script>
 </body>
 
 </html>

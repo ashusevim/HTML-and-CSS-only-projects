@@ -4,17 +4,39 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Number Guessing Game</title>
+    <title>Chroma &mdash; Infinite Colors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../showcase.css" />
 </head>
 
-<body style="background-color: #212121; color: #fff">
-    <h1>Start should change the Background color every second</h1>
-    <button id="start">Start</button>
-    <button id="stop">Stop</button>
+<body class="showcase-fade">
+    <a href="../index.html" class="showcase-home" title="Back to showcase">&larr;</a>
+    <main class="stage">
+        <div class="panel" data-reveal data-tilt>
+            <span class="eyebrow">Chroma Engine</span>
+            <h1>Infinite color, on tap.</h1>
+            <p class="lead">Press start and watch the canvas drift through an endless palette.</p>
+
+            <div class="swatch" id="swatch">
+                <span class="swatch__hex" id="hex">#212121</span>
+            </div>
+
+            <div class="controls">
+                <button id="start" class="btn btn--primary">
+                    <span class="dot"></span> Start
+                </button>
+                <button id="stop" class="btn btn--ghost">Stop</button>
+            </div>
+
+            <p class="hint">Colors shift every second while running.</p>
+        </div>
+    </main>
+
     <script src="project6.js"></script>
+    <script src="../showcase.js"></script>
 </body>
 
 </html>
